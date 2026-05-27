@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transparent Social Feed • Caution</title>
+    <meta
+      name="description"
+      content="A Caution demo prototype for verifiable social-media feed algorithms with exact ranking score breakdowns."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Transparent Social Feed • Caution" />
+    <meta
+      property="og:description"
+      content="Inspect exactly which algorithm served every social feed item and why it ranked where it did."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0f0f0f" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='120' height='120' rx='40' fill='white'/%3E%3Cline x1='35.3151' y1='72.5648' x2='25.257' y2='89.8071' stroke='black' stroke-width='10.5' stroke-linecap='round'/%3E%3Cline x1='45.1345' y1='90.4808' x2='25.173' y2='90.4808' stroke='black' stroke-width='10.5' stroke-linecap='round'/%3E%3Cline x1='70.7604' y1='43.6464' x2='60.6878' y2='26.4125' stroke='black' stroke-width='10.5' stroke-linecap='round'/%3E%3Cline x1='50.3315' y1='43.3924' x2='60.1424' y2='26.0083' stroke='black' stroke-width='10.5' stroke-linecap='round'/%3E%3Cline x1='5.25' y1='-5.25' x2='25.2115' y2='-5.25' transform='matrix(0.503871 0.863779 0.863779 -0.503871 88.4976 65.3846)' stroke='black' stroke-width='10.5' stroke-linecap='round'/%3E%3Cline x1='5.25' y1='-5.25' x2='25.2115' y2='-5.25' transform='matrix(1 0 0 -1 71.5386 85.2308)' stroke='black' stroke-width='10.5' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <nav class="nav" aria-label="Demo">
+          <div class="brand-mark" aria-hidden="true">⌁</div>
+          <span>Caution demo</span>
+          <span class="nav-pill">E2E static prototype</span>
+        </nav>
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Verifiable social algorithms</p>
+            <h1>See exactly why every post is in your feed.</h1>
+            <p class="lede">
+              This prototype turns a social-media ranking system inside out:
+              select an algorithm, inspect every input, and verify the score
+              breakdown that produced the final order.
+            </p>
+            <div class="hero-actions">
+              <a href="#feed" class="button primary">Inspect the feed</a>
+              <a href="#debug" class="button secondary">Open algorithm panel</a>
+            </div>
+          </div>
+          <aside class="attestation-card">
+            <span class="status-dot"></span>
+            <h2>Demo boundary</h2>
+            <p>
+              All people, posts, likes, and preferences are synthetic example
+              data. The Caution story here is verifiable computation and
+              encrypted delivery of auditable ranking logic — not real private
+              user data.
+            </p>
+            <ul>
+              <li>Static assets baked into the image</li>
+              <li>No paid APIs or third-party trackers</li>
+              <li>Procfile enables Caution E2E deployment</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="controls-panel" aria-labelledby="algorithm-heading">
+        <div>
+          <p class="eyebrow dark">Algorithm selector</p>
+          <h2 id="algorithm-heading">Choose the feed you want to audit</h2>
+        </div>
+        <div id="algorithmButtons" class="algorithm-buttons"></div>
+      </section>
+
+      <section class="app-grid">
+        <aside class="profile-card" aria-labelledby="viewer-heading">
+          <p class="eyebrow dark">Viewer profile</p>
+          <h2 id="viewer-heading">Mira Chen</h2>
+          <p class="muted">
+            Product researcher following makers, privacy engineers, climate
+            writers, and independent artists.
+          </p>
+          <div class="metric-list" id="viewerStats"></div>
+          <h3>Explicit topic preferences</h3>
+          <div class="preference-list" id="preferenceList"></div>
+          <h3>Following</h3>
+          <div class="following-list" id="followingList"></div>
+        </aside>
+
+        <section id="feed" class="feed-column" aria-live="polite">
+          <div class="feed-header">
+            <div>
+              <p class="eyebrow dark">Ranked output</p>
+              <h2 id="feedTitle">Feed</h2>
+            </div>
+            <button id="explainTop" class="small-button" type="button">
+              Explain top item
+            </button>
+          </div>
+          <div id="feedList" class="feed-list"></div>
+        </section>
+
+        <aside id="debug" class="debug-panel" aria-labelledby="debug-heading">
+          <div class="sticky-debug">
+            <p class="eyebrow dark">Inspect / debug</p>
+            <h2 id="debug-heading">Formula and scorecard</h2>
+            <div id="formulaBox" class="formula-box"></div>
+            <div id="selectedBreakdown" class="breakdown-card"></div>
+            <div class="order-card">
+              <h3>Final ordering</h3>
+              <ol id="rankedOrder"></ol>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <template id="postTemplate">
+      <article class="post-card">
+        <div class="post-topline">
+          <div class="avatar"></div>
+          <div>
+            <h3 class="post-author"></h3>
+            <p class="post-meta"></p>
+          </div>
+          <div class="rank-badge"></div>
+        </div>
+        <p class="post-text"></p>
+        <div class="tag-row"></div>
+        <div class="social-row"></div>
+        <div class="score-strip"></div>
+        <button class="inspect-button" type="button">Why this post?</button>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+# build outputs
+out/
+
+# local system clutter
+.DS_Store
+*.swp
+
+# editor files
+.vscode/
+.idea/
+
+# logs
+*.log
